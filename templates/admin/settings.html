@@ -1,0 +1,57 @@
+{% extends 'admin/master.html' %}
+{% block body %}
+<div style="padding: 20px;">
+    <h1>⚙️ Enterprise System Settings</h1>
+    
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
+        <div style="background: white; padding: 20px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+            <h4>🎤 OmniDimension API</h4>
+            <div style="font-size: 1.2rem; font-weight: bold; margin-top: 10px; color: {{ '#10b981' if settings.omnidim_connected else '#ef4444' }};">
+                {{ '✅ Connected' if settings.omnidim_connected else '❌ Disconnected' }}
+            </div>
+        </div>
+        
+        <div style="background: white; padding: 20px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+            <h4>💾 Storage Usage</h4>
+            <div style="font-size: 1.2rem; font-weight: bold; margin-top: 10px; color: #6366f1;">{{ settings.total_storage }}</div>
+        </div>
+        
+        <div style="background: white; padding: 20px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+            <h4>⏱️ System Uptime</h4>
+            <div style="font-size: 1.2rem; font-weight: bold; margin-top: 10px; color: #10b981;">{{ settings.uptime }}</div>
+        </div>
+        
+        <div style="background: white; padding: 20px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+            <h4>🛡️ Security Level</h4>
+            <div style="font-size: 1.2rem; font-weight: bold; margin-top: 10px; color: #10b981;">{{ settings.security_level }}</div>
+        </div>
+        
+        <div style="background: white; padding: 20px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+            <h4>🔐 Encryption</h4>
+            <div style="font-size: 1.2rem; font-weight: bold; margin-top: 10px; color: #10b981;">{{ settings.encryption_status }}</div>
+        </div>
+        
+        <div style="background: white; padding: 20px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+            <h4>⏰ Session Timeout</h4>
+            <div style="font-size: 1.2rem; font-weight: bold; margin-top: 10px; color: #f59e0b;">{{ settings.session_timeout }}</div>
+        </div>
+        
+        <div style="background: white; padding: 20px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+            <h4>📋 Privacy Compliance</h4>
+            <div style="font-size: 1.2rem; font-weight: bold; margin-top: 10px; color: #10b981;">{{ settings.privacy_compliance }}</div>
+        </div>
+        
+        <div style="background: white; padding: 20px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+            <h4>🌍 Environment</h4>
+            <div style="font-size: 1.2rem; font-weight: bold; margin-top: 10px; color: #6366f1;">{{ settings.environment }}</div>
+        </div>
+    </div>
+    
+    <div style="background: #f0fdf4; padding: 20px; border-radius: 10px; margin-top: 30px; border-left: 4px solid #10b981;">
+        <h3>🔒 Admin Access Information</h3>
+        <p><strong>Admin Email:</strong> {{ settings.admin_email }}</p>
+        <p><strong>Active Sessions:</strong> {{ settings.active_sessions }}</p>
+        <p><strong>Last Security Scan:</strong> {{ settings.last_backup }}</p>
+    </div>
+</div>
+{% endblock %}

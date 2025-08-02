@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roommate Questionnaire Form</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="survey-container">
+        <div class="survey-header">
+            <div class="user-info">
+                <div class="user-avatar-placeholder">👤</div>
+                <h1>Hi {{ username }}! 🎤</h1>
+            </div>
+            <p class="survey-subtitle">Complete your preferences survey to find perfect roommate matches</p>
+        </div>
+        
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert {{ category }}">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+        
+        {% if agent_id %}
+        <div class="voice-survey-section">
+            <div class="section-header">
+                <h2>🗣️ Voice Survey (AI-Powered)</h2>
+                <div class="ai-badge">OmniDimension AI</div>
+            </div>
+            
+            <div class="voice-benefits">
+                <div class="benefit">
+                    <span class="benefit-icon">⚡</span>
+                    <span>3x Faster</span>
+                </div>
+                <div class="benefit">
+                    <span class="benefit-icon">🎯</span>
+                    <span>More Accurate</span>
+                </div>
+                <div class="benefit">
+                    <span class="benefit-icon">🧠</span>
+                    <span>AI Understanding</span>
+                </div>
+            </div>
+            
+            <div class="voice-widget-container">
+                <iframe 
+                    src="https://widget.omnidim.io/agent/{{ agent_id }}" 
+                    class="omnidim-widget"
+                    allow="microphone; camera"
+                    title="Voice Survey">
+                </iframe>
+            </div>
+            
+            <div class="survey-instructions">
+                <h4>🎙️ How it works:</h4>
+                <ul>
+                    <li>Speak naturally about your preferences</li>
+                    <li>AI will extract your ratings automatically</li>
+                    <li>Takes about 2-3 minutes</li>
+                    <li>More accurate than manual forms</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="divider">
+            <span>OR</span>
+        </div>
+        {% endif %}
+        
+        <div class="manual-survey-section">
+            <h2>📝 Questionnaire Form</h2>
+            <p class="manual-subtitle">Rate each category from 1 to 5 based on your preferences</p>
+            
+            <form method="POST" class="survey-form">
+                <div class="questions-grid">
+                    <div class="question-card">
+                        <div class="question-header">
+                            <span class="question-icon">💼</span>
+                            <h3>Work Culture</h3>
+                        </div>
+                        <div class="rating-container">
+                            <input type="number" name="work_culture" min="1" max="5" value="3" required>
+                        </div>
+                        <div class="rating-scale">
+                            <span>1 = Day Shift</span>
+                            <span>3 = Hybrid</span>
+                            <span>5 = Night Shift</span>
+                        </div>
+                    </div>
+                    
+                    <div class="question-card">
+                        <div class="question-header">
+                            <span class="question-icon">😴</span>
+                            <h3>Sleep Lifestyle</h3>
+                        </div>
+                        <div class="rating-container">
+                            <input type="number" name="sleep_lifestyle" min="1" max="5" value="3" required>
+                        </div>
+                        <div class="rating-scale">
+                            <span>1 = Early Bird</span>
+                            <span>5 = Night Owl</span>
+                        </div>
+                    </div>
+                    
+                    <div class="question-card">
+                        <div class="question-header">
+                            <span class="question-icon">👥</span>
+                            <h3>Social Behavior</h3>
+                        </div>
+                        <div class="rating-container">
+                            <input type="number" name="social_behavior" min="1" max="5" value="3" required>
+                        </div>
+                        <div class="rating-scale">
+                            <span>1 = Introvert</span>
+                            <span>5 = Extrovert</span>
+                        </div>
+                    </div>
+                    
+                    <div class="question-card">
+                        <div class="question-header">
+                            <span class="question-icon">✨</span>
+                            <h3>Cleanliness</h3>
+                        </div>
+                        <div class="rating-container">
+                            <input type="number" name="cleanliness" min="1" max="5" value="3" required>
+                        </div>
+                        <div class="rating-scale">
+                            <span>1 = Casual</span>
+                            <span>5 = Very Organized</span>
+                        </div>
+                    </div>
+                    
+                    <div class="question-card">
+                        <div class="question-header">
+                            <span class="question-icon">🍽️</span>
+                            <h3>Food Preferences</h3>
+                        </div>
+                        <div class="rating-container">
+                            <input type="number" name="food_preferences" min="1" max="5" value="3" required>
+                        </div>
+                        <div class="rating-scale">
+                            <span>1 = Vegetarian</span>
+                            <span>5 = Non-Vegetarian</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <button type="submit" class="btn-submit">
+                    🎯 Find My Perfect Matches!
+                </button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

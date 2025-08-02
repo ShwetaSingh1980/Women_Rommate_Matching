@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎙️ Roommate Voice Chat - Women's Roommate Finder</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        .chat-container {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 25px;
+            padding: 30px;
+            max-width: 800px;
+            margin: 0 auto;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+        .chat-header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #e5e7eb;
+        }
+        .chat-header h1 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+        .compatibility-badge {
+            background: linear-gradient(45deg, #10b981, #34d399);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: bold;
+            display: inline-block;
+        }
+        .voice-widget-container {
+            background: white;
+            padding: 25px;
+            border-radius: 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            margin: 25px 0;
+        }
+        .omnidim-widget {
+            width: 100%;
+            height: 500px;
+            border: none;
+            border-radius: 15px;
+        }
+        .chat-instructions {
+            background: #f0fdf4;
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            border-left: 4px solid #10b981;
+        }
+        .instructions-list {
+            margin: 15px 0;
+            padding-left: 20px;
+        }
+        .instructions-list li {
+            margin: 8px 0;
+            color: #15803d;
+        }
+        .close-button {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #ef4444;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+            z-index: 1000;
+        }
+        .close-button:hover {
+            background: #dc2626;
+        }
+    </style>
+</head>
+<body>
+    <button class="close-button" onclick="window.close()">✕ Close Chat</button>
+    
+    <div class="chat-container">
+        <div class="chat-header">
+            <h1>🎙️ Roommate Voice Chat</h1>
+            <div class="compatibility-badge">High Compatibility Match!</div>
+            <p style="color: #666; margin-top: 15px;">Welcome {{ username }}! Get ready to meet your potential roommate.</p>
+        </div>
+        
+        <div class="chat-instructions">
+            <h3>🎯 How This Works:</h3>
+            <ol class="instructions-list">
+                <li><strong>Voice Introduction:</strong> RoommateConnectAI will greet both of you and facilitate introductions</li>
+                <li><strong>Guided Conversation:</strong> The AI will ask icebreaker questions about roommate preferences</li>
+                <li><strong>Natural Transition:</strong> After 3-5 minutes, you can continue chatting on your own</li>
+                <li><strong>Switch to Text:</strong> Feel free to exchange contact info and continue via text</li>
+            </ol>
+            <p><strong>💡 Tip:</strong> Speak clearly and wait for each other to finish before responding!</p>
+        </div>
+        
+        {% if agent_id %}
+        <div class="voice-widget-container">
+            <iframe 
+                src="https://widget.omnidim.io/agent/{{ agent_id }}" 
+                class="omnidim-widget"
+                allow="microphone; camera"
+                title="Roommate Voice Chat">
+            </iframe>
+        </div>
+        {% else %}
+        <div style="background: #fef2f2; color: #dc2626; padding: 30px; border-radius: 15px; text-align: center;">
+            <h3>⚠️ Chat Unavailable</h3>
+            <p>Unable to initialize voice chat. Please try again later.</p>
+        </div>
+        {% endif %}
+        
+        <div style="background: #eff6ff; padding: 20px; border-radius: 15px; text-align: center; margin-top: 20px;">
+            <h4>🔒 Privacy & Safety</h4>
+            <p style="color: #1e40af; margin: 0;">This chat is facilitated by AI. Never share personal addresses or financial information. Report any inappropriate behavior to our support team.</p>
+        </div>
+    </div>
+</body>
+</html>

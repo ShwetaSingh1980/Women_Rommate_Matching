@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome - Women's Roommate Finder</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="welcome-container">
+        <div class="welcome-card">
+            <div class="welcome-header">
+                <div class="user-welcome">
+                    {% if profile_pic %}
+                        <img src="/uploads/{{ profile_pic }}" alt="Profile" class="welcome-profile-image">
+                    {% endif %}
+                    <div class="welcome-text">
+                        <h1>🎉 Welcome, {{ username }}!</h1>
+                        <p class="welcome-subtitle">Ready to find your perfect roommate match?</p>
+                    </div>
+                </div>
+            </div>
+            
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        <div class="alert {{ category }}">
+                            <span class="alert-icon">
+                                {% if category == 'error' %}❌{% else %}✅{% endif %}
+                            </span>
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+<!--             
+            <div class="welcome-content">
+                <div class="journey-steps">
+                    <h2>🗺️ Your Journey to Perfect Roommate Matching</h2>
+                    
+                    <div class="steps-grid">
+                        <div class="step-card completed">
+                            <div class="step-icon">✅</div>
+                            <div class="step-content">
+                                <h3>Step 1: Account Created</h3>
+                                <p>Successfully registered with profile picture</p>
+                            </div>
+                        </div>
+                        
+                        <div class="step-card current">
+                            <div class="step-icon">🎤</div>
+                            <div class="step-content">
+                                <h3>Step 2: Complete Survey</h3>
+                                <p>Tell us about your living preferences using our AI-powered voice survey</p>
+                            </div>
+                        </div>
+                        
+                        <div class="step-card pending">
+                            <div class="step-icon">🎯</div>
+                            <div class="step-content">
+                                <h3>Step 3: Get Matches</h3>
+                                <p>Receive AI-calculated compatibility scores with other users</p>
+                            </div>
+                        </div>
+                        
+                        <div class="step-card pending">
+                            <div class="step-icon">💬</div>
+                            <div class="step-content">
+                                <h3>Step 4: Connect & Chat</h3>
+                                <p>Start conversations with 80%+ compatible matches</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="platform-features">
+                    <h3>🌟 What Makes Our Platform Special</h3>
+                    <div class="features-grid">
+                        <div class="feature-item">
+                            <span class="feature-icon">🎙️</span>
+                            <div class="feature-text">
+                                <h4>OmniDimension Voice AI</h4>
+                                <p>Advanced voice processing for natural survey completion</p>
+                            </div>
+                        </div>
+                        
+                        <div class="feature-item">
+                            <span class="feature-icon">🧮</span>
+                            <div class="feature-text">
+                                <h4>Weighted Matching Algorithm</h4>
+                                <p>Work Culture 25% + Sleep 20% + Social 20% + Cleanliness 20% + Food 15%</p>
+                            </div>
+                        </div>
+                        
+                        <div class="feature-item">
+                            <span class="feature-icon">🛡️</span>
+                            <div class="feature-text">
+                                <h4>Women-Only Safety</h4>
+                                <p>Secure platform designed specifically for women's co-living needs</p>
+                            </div>
+                        </div>
+                        
+                        <div class="feature-item">
+                            <span class="feature-icon">🏠</span>
+                            <div class="feature-text">
+                                <h4>Smart Room Matching</h4>
+                                <p>AI suggests optimal room assignments based on compatibility</p>
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
+                
+                <div class="cta-section">
+                    <h3>🚀 Ready to Find Your Perfect Match?</h3>
+                    <p>Complete our AI-powered survey to discover compatible roommates</p>
+                    
+                    <div class="cta-buttons">
+                        <a href="/survey" class="btn primary large">
+                            🎤 Start Questionnaire
+                        </a>
+                        <a href="/" class="btn secondary">
+                            🏠 Back to Home
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - Women's Roommate Finder</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="form-container">
+        <div class="form-card">
+            <div class="form-header">
+                <h2>👩‍🤝‍👩 Join Our Community</h2>
+                <p class="form-subtitle">Find your perfect roommate match</p>
+            </div>
+            
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        <div class="alert {{ category }}">{{ message }}</div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+            
+            <form method="POST" class="registration-form">
+                <div class="input-group">
+                    <label for="name">👤 Full Name</label>
+                    <input type="text" id="name" name="name" class="form-input" placeholder="Enter your full name" required>
+                </div>
+                
+                <div class="input-group">
+                    <label for="email">📧 Email Address</label>
+                    <input type="email" id="email" name="email" class="form-input" placeholder="Enter your email" required>
+                </div>
+                
+                <div class="input-group">
+                    <label for="password">🔒 Password</label>
+                    <input type="password" id="password" name="password" class="form-input" placeholder="Create a strong password" required>
+                </div>
+                
+                <div class="input-group">
+                    <label for="full_address">🏠 Full Address</label>
+                    <textarea id="full_address" name="full_address" class="form-input" placeholder="Enter your complete address" rows="3" required></textarea>
+                </div>
+                
+                <div class="address-row">
+                    <div class="input-group half-width">
+                        <label for="city">🏙️ City</label>
+                        <input type="text" id="city" name="city" class="form-input" placeholder="Your city" required>
+                    </div>
+                    
+                    <div class="input-group half-width">
+                        <label for="state">📍 State</label>
+                        <input type="text" id="state" name="state" class="form-input" placeholder="Your state" required>
+                    </div>
+                </div>
+                
+                <!-- NO FILE UPLOAD BUTTON -->
+                
+                <button type="submit" class="btn primary full-width">🚀 Create Account</button>
+            </form>
+            
+            <div class="form-footer">
+                <p>Already have an account? <a href="/login">Login here</a></p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

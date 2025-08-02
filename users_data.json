@@ -1,0 +1,128 @@
+{
+  "abc@gmail.com": {
+    "name": "Shweta Singh",
+    "password": "e5857b335afdf35ca81a110bc81f38682f8a89892cc597f5398dfef82d42b513",
+    "profile_pic": "abcgmail.com_WhatsApp_Image_2025-07-28_at_23.01.02_8d1710e4.jpg",
+    "registration_date": "2025-08-01T13:54:29.882026",
+    "survey_completed": true,
+    "survey_responses": {
+      "work_culture": 3,
+      "sleep_lifestyle": 3,
+      "social_behavior": 3,
+      "cleanliness": 3,
+      "food_preferences": 3
+    },
+    "survey_date": "2025-08-02T11:46:02.723886"
+  },
+  "shweta@gmail.com": {
+    "name": "Shweta",
+    "password": "e5857b335afdf35ca81a110bc81f38682f8a89892cc597f5398dfef82d42b513",
+    "profile_pic": "shwetagmail.com_room.png",
+    "registration_date": "2025-08-01T14:02:25.596251",
+    "survey_completed": true,
+    "survey_responses": {
+      "work_culture": 5,
+      "sleep_lifestyle": 3,
+      "social_behavior": 3,
+      "cleanliness": 3,
+      "food_preferences": 3
+    },
+    "survey_date": "2025-08-01T14:04:21.660626"
+  },
+  "shreya@gmail.com": {
+    "name": "shreya",
+    "password": "7c0186c5c75fc3b4434a31302f44c22ea222ae35e34dcd26a1b19ee16dcc1a51",
+    "profile_pic": "shreyagmail.com_vanshika.jpg",
+    "registration_date": "2025-08-01T14:07:34.774429",
+    "survey_completed": true,
+    "survey_responses": {
+      "work_culture": 5,
+      "sleep_lifestyle": 3,
+      "social_behavior": 3,
+      "cleanliness": 3,
+      "food_preferences": 3
+    },
+    "survey_date": "2025-08-01T14:08:07.229499"
+  },
+  "rimi@gmail.com": {
+    "name": "Rimi",
+    "password": "6aec2753ecdaae4b30a0dbc033d20cf08bdec1cb6d9aa3487ac00a7bb4bd9545",
+    "profile_pic": "rimigmail.com_vanshika.jpg",
+    "registration_date": "2025-08-01T15:37:22.625305",
+    "survey_completed": true,
+    "survey_responses": {
+      "work_culture": 3,
+      "sleep_lifestyle": 3,
+      "social_behavior": 3,
+      "cleanliness": 3,
+      "food_preferences": 3
+    },
+    "survey_date": "2025-08-02T01:03:11.863790"
+  },
+  "parul@gmail.com": {
+    "name": "Parul",
+    "password": "1410697489aeea5290dc1009ea0131da74fd576f1c5db3b1a760ec5adb7eafd9",
+    "profile_pic": "parulgmail.com_vanshika.jpg",
+    "registration_date": "2025-08-01T15:40:08.701136",
+    "survey_completed": true,
+    "survey_responses": {
+      "work_culture": 1,
+      "sleep_lifestyle": 1,
+      "social_behavior": 1,
+      "cleanliness": 5,
+      "food_preferences": 4
+    },
+    "survey_date": "2025-08-01T15:41:00.173248"
+  },
+  "shiv@gmail.com": {
+    "name": "Shivali ",
+    "password": "0083d569d88032de28cc325bfb600cc19ee51dcf59f57772225f4800baf3e418",
+    "profile_pic": "shivgmail.com_vanshika.jpg",
+    "registration_date": "2025-08-01T15:41:59.833839",
+    "survey_completed": true,
+    "survey_responses": {
+      "work_culture": 5,
+      "sleep_lifestyle": 5,
+      "social_behavior": 4,
+      "cleanliness": 1,
+      "food_preferences": 2
+    },
+    "survey_date": "2025-08-01T16:00:52.444765"
+  },
+  "sim@gmail.com": {
+    "name": "simran",
+    "password": "788210cbcc5c7a2e7f1307d10b771bd91badca6bb43a4000f1b79207220088b4",
+    "profile_pic": "default_avatar.png",
+    "full_address": "th jfnkek 8,ghhfe",
+    "city": "Ranchi",
+    "state": "Jharkhand",
+    "registration_date": "2025-08-02T03:13:12.622878",
+    "survey_completed": true,
+    "survey_responses": {
+      "work_culture": 5,
+      "sleep_lifestyle": 3,
+      "social_behavior": 3,
+      "cleanliness": 3,
+      "food_preferences": 1
+    },
+    "survey_date": "2025-08-02T03:13:58.888986"
+  },
+  "siya@gmail.com": {
+    "name": "siya",
+    "password": "5e49f9954693f214698909b2265c752e909bc6cb31c079cc5a020920d3f993a9",
+    "profile_pic": "default_avatar.png",
+    "full_address": "ashok nagar",
+    "city": "Dhanbad",
+    "state": "Jharkhand",
+    "registration_date": "2025-08-02T03:15:55.985652",
+    "survey_completed": true,
+    "survey_responses": {
+      "work_culture": 1,
+      "sleep_lifestyle": 3,
+      "social_behavior": 3,
+      "cleanliness": 3,
+      "food_preferences": 5
+    },
+    "survey_date": "2025-08-02T03:16:42.160002"
+  }
+}

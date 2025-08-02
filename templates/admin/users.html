@@ -1,0 +1,47 @@
+{% extends 'admin/master.html' %}
+{% block body %}
+<div style="padding: 20px;">
+    <h1>👥 User Management (Admin Full Access)</h1>
+    
+    <div style="background: #e0f2fe; padding: 15px; border-radius: 10px; margin: 20px 0; color: #0277bd; border-left: 4px solid #03a9f4;">
+        🔍 <strong>Admin Access:</strong> Full user data is visible including complete names and email addresses for administrative purposes.
+    </div>
+    
+    <table style="width: 100%; border-collapse: collapse; background: white; border-radius: 10px; overflow: hidden;">
+        <thead>
+            <tr style="background: #f8fafc;">
+                <th style="padding: 12px; text-align: left; border-bottom: 1px solid #e5e7eb;">ID</th>
+                <th style="padding: 12px; text-align: left; border-bottom: 1px solid #e5e7eb;">Full Name</th>
+                <th style="padding: 12px; text-align: left; border-bottom: 1px solid #e5e7eb;">Email Address</th>
+                <th style="padding: 12px; text-align: left; border-bottom: 1px solid #e5e7eb;">Full Address</th>
+                <th style="padding: 12px; text-align: left; border-bottom: 1px solid #e5e7eb;">City</th>
+                <th style="padding: 12px; text-align: left; border-bottom: 1px solid #e5e7eb;">State</th>
+                <th style="padding: 12px; text-align: left; border-bottom: 1px solid #e5e7eb;">Registration</th>
+                <th style="padding: 12px; text-align: left; border-bottom: 1px solid #e5e7eb;">Survey Status</th>
+                <th style="padding: 12px; text-align: left; border-bottom: 1px solid #e5e7eb;">Activity</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for user in users %}
+            <tr>
+                <td style="padding: 12px; border-bottom: 1px solid #e5e7eb;">{{ user.id }}</td>
+                <td style="padding: 12px; border-bottom: 1px solid #e5e7eb; font-weight: 600;">{{ user.name }}</td>
+                <td style="padding: 12px; border-bottom: 1px solid #e5e7eb; font-family: monospace;">{{ user.email }}</td>
+                <td style="padding: 12px; border-bottom: 1px solid #e5e7eb; font-size: 0.9rem;">{{ user.full_address }}</td>
+                <td style="padding: 12px; border-bottom: 1px solid #e5e7eb;">{{ user.city }}</td>
+                <td style="padding: 12px; border-bottom: 1px solid #e5e7eb;">{{ user.state }}</td>
+                <td style="padding: 12px; border-bottom: 1px solid #e5e7eb;">{{ user.registration_date }}</td>
+                <td style="padding: 12px; border-bottom: 1px solid #e5e7eb;">
+                    {% if user.survey_completed %}
+                        <span style="color: #10b981; font-weight: 600;">✅ Completed</span>
+                    {% else %}
+                        <span style="color: #f59e0b; font-weight: 600;">⏳ Pending</span>
+                    {% endif %}
+                </td>
+                <td style="padding: 12px; border-bottom: 1px solid #e5e7eb;">{{ user.activity_status }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

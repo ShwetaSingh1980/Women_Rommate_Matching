@@ -1,0 +1,35 @@
+{% extends 'admin/master.html' %}
+{% block body %}
+<div style="padding: 20px;">
+    <h1>🤖 AI Admin Assistant</h1>
+    <p style="color: #666; font-size: 1.1rem; margin-bottom: 30px;">Your intelligent assistant for platform analytics, user insights, and system performance monitoring.</p>
+    
+    {% if agent_id %}
+    <div style="background: white; padding: 20px; border-radius: 15px; margin: 20px 0; box-shadow: 0 4px 20px rgba(0,0,0,0.1);">
+        <iframe 
+            src="https://widget.omnidim.io/agent/{{ agent_id }}" 
+            style="width: 100%; height: 500px; border: none; border-radius: 10px;"
+            allow="microphone; camera"
+            title="Admin AI Assistant">
+        </iframe>
+    </div>
+    
+    <div style="background: #f0fdf4; padding: 20px; border-radius: 10px; margin-top: 20px;">
+        <h3>🎯 What I can help with:</h3>
+        <ul style="margin-left: 20px;">
+            <li>📊 Explain user analytics and platform trends</li>
+            <li>🔍 Analyze matching algorithm performance</li>
+            <li>📈 Provide platform growth insights</li>
+            <li>🛡️ Privacy and security guidance</li>
+            <li>🎤 OmniDimension integration support</li>
+            <li>📋 Generate reports and recommendations</li>
+        </ul>
+    </div>
+    {% else %}
+    <div style="background: #fef2f2; color: #dc2626; padding: 30px; border-radius: 10px; text-align: center;">
+        <h3>⚠️ AI Assistant Temporarily Unavailable</h3>
+        <p>Please check your OmniDimension API configuration or contact system administrator.</p>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

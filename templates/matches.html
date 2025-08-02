@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Roommate Matches - AI Results</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="matches-container">
+        <div class="matches-header">
+            <div class="user-section">
+                <!-- FIXED: Clean blue avatar placeholder (no profile picture) -->
+                <div class="user-avatar-placeholder">👤</div>
+                <div>
+                    <h1>Perfect Matches for {{ username }} 🎯</h1>
+                    <p class="matches-subtitle">AI-powered compatibility matching results</p>
+                </div>
+            </div>
+            
+            <div class="header-actions">
+                <!-- Enhanced Update Survey button -->
+                <a href="/survey" class="btn primary large">🔄 Update Survey</a>
+                <a href="/logout" class="btn outline">👋 Logout</a>
+            </div>
+        </div>
+        
+        <!-- Streamlined stats display (removed Total Users and Survey Completed as requested) -->
+        <div class="platform-stats">
+            <div class="stat-card">
+                <span class="stat-number">{{ stats.your_matches }}</span>
+                <span class="stat-label">Your Matches</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-number">{{ stats.high_compatibility }}</span>
+                <span class="stat-label">High Compatibility</span>
+            </div>
+        </div>
+        
+        {% if matches %}
+            <div class="matches-grid">
+                {% for match in matches %}
+                <div class="match-card {{ 'high-match' if match.score >= 80 else 'medium-match' if match.score >= 60 else 'low-match' }}">
+                    <div class="match-header">
+                        <div class="match-info">
+                            <!-- FIXED: Clean blue avatar placeholder (no profile picture) -->
+                            <div class="match-avatar-placeholder">👤</div>
+                            <div class="match-details-text">
+                                <h3>{{ match.name }}</h3>
+                                <!-- Privacy-protected email -->
+                                <p class="match-email-masked">📧 {{ match.email }}</p>
+                                <!-- Location display -->
+                                <p class="match-location">📍 {{ match.city }}, {{ match.state }}</p>
+                            </div>
+                        </div>
+                        <div class="compatibility-score">
+                            <div class="score-circle {{ match.compatibility_level.lower() }}">
+                                {{ match.score }}%
+                            </div>
+                            <span class="compatibility-label">{{ match.compatibility_level }}</span>
+                        </div>
+                    </div>
+                    
+                    <div class="match-details">
+                        <div class="room-suggestion">
+                            <span class="room-icon">🏠</span>
+                            <span><strong>Suggested Room:</strong> {{ match.room }}</span>
+                        </div>
+                        
+                        <div class="compatibility-features">
+                            <div class="feature">
+                                <span class="feature-icon">💼</span>
+                                <span>Compatible work style</span>
+                            </div>
+                            <div class="feature">
+                                <span class="feature-icon">😴</span>
+                                <span>Similar sleep schedule</span>
+                            </div>
+                            <div class="feature">
+                                <span class="feature-icon">✨</span>
+                                <span>Aligned cleanliness</span>
+                            </div>
+                        </div>
+                        
+                        <div class="match-actions">
+                            {% if match.score >= 80 %}
+                                <button class="btn success" onclick="startChat('{{ match.name }}', '{{ match.original_email }}', {{ match.score }})">
+                                    💬 Start Chat
+                                </button>
+                                <!-- <button class="btn primary" onclick="viewProfile('{{ match.name }}', '{{ match.city }}', '{{ match.state }}')">
+                                    👤 View Profile
+                                </button> -->
+                            {% else %}
+                                <button class="btn disabled" title="Chat available for 80%+ matches">
+                                    💬 Chat Locked ({{ match.score }}%)
+                                </button>
+                                <!-- <button class="btn secondary" onclick="viewProfile('{{ match.name }}', '{{ match.city }}', '{{ match.state }}')">
+                                    👤 View Profile
+                                </button> -->
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            
+            <!-- <div class="algorithm-info">
+                <h3>🤖 How Our AI Matching Works</h3>
+                <div class="algorithm-steps">
+                    <div class="step">
+                        <span class="step-number">1</span>
+                        <div>
+                            <h4>Voice/Survey Analysis</h4>
+                            <p>Extract preferences using AI voice processing or manual input</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <span class="step-number">2</span>
+                        <div>
+                            <h4>Weighted Compatibility Scoring</h4>
+                            <p>Work Culture 25% + Sleep 20% + Social 20% + Cleanliness 20% + Food 15%</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <span class="step-number">3</span>
+                        <div>
+                            <h4>Bubble Sort Ranking</h4>
+                            <p>Matches ranked by compatibility for optimal roommate selection</p>
+                        </div>
+                    </div>
+                </div>
+            </div> -->
+            
+            <!-- Privacy protection notice -->
+            <div class="privacy-notice">
+                <div class="privacy-icon">🛡️</div>
+                <div>
+                    <h4>Your Privacy is Protected</h4>
+                    <p>Email addresses are masked and full addresses are hidden for your safety. Only city and state are visible to help you find local roommates.</p>
+                </div>
+            </div>
+        {% else %}
+            <div class="no-matches">
+                <div class="no-matches-icon">🔍</div>
+                <h3>No Compatible Matches Found Yet</h3>
+                <p>Be the first to complete your survey! More users joining daily.</p>
+                <div class="no-matches-actions">
+                    <a href="/survey" class="btn primary">🔄 Retake Survey</a>
+                    <a href="/" class="btn secondary">🏠 Back Home</a>
+                </div>
+            </div>
+        {% endif %}
+    </div>
+
+    <script>
+        // UPDATED: Real chat integration with OmniDimension voice functionality
+        function startChat(name, originalEmail, compatibility) {
+            if (compatibility >= 80) {
+                // Show loading message
+                const button = event.target;
+                const originalText = button.innerHTML;
+                button.innerHTML = '🔄 Creating Voice Chat...';
+                button.disabled = true;
+                button.style.opacity = '0.7';
+                
+                // Create chat agent via Flask backend API
+                fetch('/start_chat', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-Requested-With': 'XMLHttpRequest'
+                    },
+                    body: JSON.stringify({
+                        match_email: originalEmail,
+                        match_name: name,
+                        compatibility_score: compatibility
+                    })
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    if (data.success) {
+                        // Update button to show success
+                        button.innerHTML = '🎙️ Voice Chat Created!';
+                        button.style.background = '#10b981';
+                        button.style.opacity = '1';
+                        
+                        // Open chat in new window/tab with proper dimensions for voice interface
+                        const chatWindow = window.open(
+                            `/chat/${data.agent_id}`, 
+                            'RoommateVoiceChat',
+                            'width=900,height=700,scrollbars=yes,resizable=yes,toolbar=no,menubar=no'
+                        );
+                        
+                        // Focus the new window
+                        if (chatWindow) {
+                            chatWindow.focus();
+                        }
+                        
+                        // Show success notification
+                        showNotification(`🎉 Voice chat with ${name} is ready! Check the new window.`, 'success');
+                        
+                        // Reset button after 3 seconds
+                        setTimeout(() => {
+                            button.innerHTML = '💬 Create New Chat';
+                            button.disabled = false;
+                            button.style.background = '';
+                        }, 3000);
+                        
+                    } else {
+                        throw new Error(data.error || 'Unknown error occurred');
+                    }
+                })
+                .catch(error => {
+                    console.error('Chat creation error:', error);
+                    
+                    // Reset button and show error
+                    button.innerHTML = originalText;
+                    button.disabled = false;
+                    button.style.opacity = '1';
+                    
+                    // Show user-friendly error message
+                    showNotification(`❌ Failed to create voice chat: ${error.message}`, 'error');
+                });
+            } else {
+                showNotification(`💬 Voice Chat Locked (${compatibility}%)\n\nVoice chat is available for matches with 80%+ compatibility. This helps ensure better roommate connections!`, 'info');
+            }
+        }
+        
+        // Utility function to show notifications
+        function showNotification(message, type = 'info') {
+            // Create notification element
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                max-width: 400px;
+                padding: 20px;
+                border-radius: 12px;
+                color: white;
+                font-weight: 600;
+                z-index: 10000;
+                box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+                transform: translateX(450px);
+                transition: transform 0.3s ease;
+            `;
+            
+            // Set color based on type
+            switch(type) {
+                case 'success':
+                    notification.style.background = 'linear-gradient(45deg, #10b981, #34d399)';
+                    break;
+                case 'error':
+                    notification.style.background = 'linear-gradient(45deg, #ef4444, #f87171)';
+                    break;
+                case 'info':
+                default:
+                    notification.style.background = 'linear-gradient(45deg, #6366f1, #8b5cf6)';
+                    break;
+            }
+            
+            notification.innerHTML = message.replace(/\n/g, '<br>');
+            document.body.appendChild(notification);
+            
+            // Animate in
+            setTimeout(() => {
+                notification.style.transform = 'translateX(0)';
+            }, 100);
+            
+            // Auto remove after 5 seconds
+            setTimeout(() => {
+                notification.style.transform = 'translateX(450px)';
+                setTimeout(() => {
+                    document.body.removeChild(notification);
+                }, 300);
+            }, 5000);
+        }
+        
+        // function viewProfile(name, city, state) {
+        //     alert(`👤 Profile View for ${name}\n\nLocation: ${city}, ${state}\nDetailed compatibility analysis would show here.\n\nNote: Full address and email are protected for privacy\n\nIn full version: Complete profile and compatibility breakdown.`);
+        // }
+
+        // Enhanced interactivity
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add hover effects to match cards
+            const matchCards = document.querySelectorAll('.match-card');
+            matchCards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-8px)';
+                });
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0)';
+                });
+            });
+            
+            // Add visual feedback for high compatibility matches
+            const highCompatibilityCards = document.querySelectorAll('.match-card.high-match');
+            highCompatibilityCards.forEach(card => {
+                card.style.border = '2px solid #10b981';
+                card.style.boxShadow = '0 8px 32px rgba(16, 185, 129, 0.2)';
+            });
+        });
+    </script>
+</body>
+</html>

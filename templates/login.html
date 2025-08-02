@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Women's Roommate Finder</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="form-container">
+        <div class="form-card">
+            <div class="form-header">
+                <h2>🔐 Welcome Back</h2>
+                <p class="form-subtitle">Login to find your perfect roommate match</p>
+            </div>
+            
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        <div class="alert {{ category }}">
+                            <span class="alert-icon">
+                                {% if category == 'error' %}❌{% else %}✅{% endif %}
+                            </span>
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+            
+            <form method="POST" class="login-form">
+                <div class="input-group">
+                    <label for="email" class="input-label">
+                        <span class="label-icon">📧</span>
+                        Email Address
+                    </label>
+                    <input type="email" id="email" name="email" class="form-input" 
+                           placeholder="Enter your email address" required>
+                </div>
+                
+                <div class="input-group">
+                    <label for="password" class="input-label">
+                        <span class="label-icon">🔒</span>
+                        Password
+                    </label>
+                    <input type="password" id="password" name="password" class="form-input" 
+                           placeholder="Enter your password" required>
+                </div>
+                
+                <button type="submit" class="btn primary full-width">
+                    🎯 Login & Continue
+                </button>
+            </form>
+            
+            <div class="form-footer">
+                <p>New to our platform? <a href="/register" class="link">Create an account</a></p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
